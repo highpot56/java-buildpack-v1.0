@@ -25,6 +25,17 @@
 
 		<Engine defaultHost='localhost' name='Catalina'>
 			<Valve className="org.apache.catalina.valves.RemoteIpValve" protocolHeader="x-forwarded-proto"/>
+			
+			<!-- GEA10V01 -->
+			<Realm className="org.apache.catalina.realm.JDBCRealm"
+				driverName="${connectionDriver}"
+				connectionURL="${connectionUrl}"
+				connectionName="${connectionName}"
+				connectionPassword="${connectionPassword}"
+				userTable="gea10v01" userNameCol="userid" userCredCol="passwd"
+				userRoleTable="gea10v01" roleNameCol="system_id"
+			/>
+			
 			<Host name='localhost'>
 				<Listener className="com.gopivotal.buildpack.support.tomcat.ApplicationStartupFailureDetectingLifecycleListener"/>
 			</Host>
